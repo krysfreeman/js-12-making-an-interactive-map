@@ -34,7 +34,31 @@ const options = {
     .then(response => console.log(response))
     .catch(err => console.error(err));
 
-
+// foursquare business
+async function placeSearch() {
+    try {
+        const searchParams = new URLSearchParams({
+          query: 'coffee',
+          near: 'Surprise, AZ',
+          open_now: 'true',
+          sort: 'DISTANCE'
+        });
+        const results = await fetch(
+          `https://api.foursquare.com/v3/places/search?${searchParams}`,
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'fsq3ATzZbmcGhdeFafr73wZcnJ+LlN6bK+4dh19a7ClS4u8=',
+            }
+          }
+        );
+        const data = await results.json();
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 
 
